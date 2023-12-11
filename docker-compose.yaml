@@ -7,10 +7,10 @@ services:
     command: pnpm run start:dev reservations
     ports:
       - '3000:3000'
+    volumes:
+      - /run/desktop/mnt/host/c/Users/K1/Desktop/Milad Development/nestTest/sleepr/usr/src/app
     env_file:
       - ./apps/reservations/.env
-    volumes:
-      - .:/usr/src/app
   auth:
     build:
       context: .
@@ -19,21 +19,21 @@ services:
     command: pnpm run start:dev auth
     ports:
       - '3001:3001'
+    volumes:
+      - /run/desktop/mnt/host/c/Users/K1/Desktop/Milad Development/nestTest/sleepr/usr/src/app
     env_file:
       - ./apps/auth/.env
-    volumes:
-      - .:/usr/src/app
   payments:
     build:
       context: .
-      dockerfile: ./apps/auth/DockerFile
+      dockerfile: ./apps/payments/DockerFile
       target: development
-    command: pnpm run start:dev auth
+    command: pnpm run start:dev payments
     ports:
-      - '3001:3001'
-    env_file:
-      - ./apps/auth/.env
+      - '3003:3003'
     volumes:
-      - .:/usr/src/app
+      - /run/desktop/mnt/host/c/Users/K1/Desktop/Milad Development/nestTest/sleepr/usr/src/app
+    env_file:
+      - ./apps/payments/.env
   mongo:
     image: mongo
